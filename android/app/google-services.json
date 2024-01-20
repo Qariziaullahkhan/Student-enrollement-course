@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "554485826959",
+    "project_id": "student-enrollment-cour",
+    "storage_bucket": "student-enrollment-cour.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554485826959:android:bc08ef20bb5e625c08f7fa",
+        "android_client_info": {
+          "package_name": "com.example.online_enrollmet_course"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsc-PCiCPgeX-dIgqH5c8z11o4fovCs8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
