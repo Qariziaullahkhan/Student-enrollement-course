@@ -5,7 +5,6 @@ import 'package:gap/gap.dart';
 import 'package:online_enrollmet_course/src/core/UI/screens/auth/sign_in/login.dart';
 import 'package:online_enrollmet_course/src/core/UI/screens/profile_screen.dart';
 import 'package:online_enrollmet_course/src/core/UI/screens/student_list.dart';
-import 'package:online_enrollmet_course/src/core/UI/screens/update_student.dart';
 import 'package:online_enrollmet_course/src/core/UI/screens/utility.dart';
 
 class AddStudentData extends StatefulWidget {
@@ -25,25 +24,6 @@ class _AddStudentDataState extends State<AddStudentData> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          // IconButton(
-          //     onPressed: () {
-          //       Navigator.of(context)
-          //           .push(MaterialPageRoute(builder: (context) {
-          //         return const ProFielScreen();
-          //       }));
-          //     },
-          //     icon: const Icon(Icons.person)),
-          IconButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-                Navigator.of(context)
-                    .pushReplacement(MaterialPageRoute(builder: (context) {
-                  return const LoginScreen();
-                }));
-              },
-              icon: const Icon(Icons.logout)),
-        ],
         automaticallyImplyLeading: false,
         centerTitle: true,
         elevation: 0,
@@ -129,7 +109,7 @@ class _AddStudentDataState extends State<AddStudentData> {
                       TotalFee.isEmpty ||
                       FeePaid.isEmpty) {
                     Utils.toastmessage(
-                        "Please Provide all the fields", Colors.red);
+                        "Please Provide all the task Name", Colors.black);
                     return;
                   }
                   User? user = FirebaseAuth.instance.currentUser;
@@ -144,14 +124,14 @@ class _AddStudentDataState extends State<AddStudentData> {
                         .doc();
                     await taskRef.set({
                       "dt": dt,
-                      "task Id": taskRef.id,
+                      "task Id": taskRef.id.toString(),
                       "Name": Name,
                       "Course": Course,
                       "Mobile": Mobile,
                       "Total Fee": TotalFee,
                       "Fee Paid": FeePaid,
                     });
-                    Utils.toastmessage("Student data Added", Colors.pink);
+                    Utils.toastmessage("Student data Added", Colors.black);
                     Navigator.of(context).pop();
                   }
 

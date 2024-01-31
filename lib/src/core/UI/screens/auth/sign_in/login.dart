@@ -16,12 +16,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailcontroller = TextEditingController();
-  TextEditingController passwordcontroller = TextEditingController();
+  var emailcontroller = TextEditingController();
+  var passwordcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.red,
         centerTitle: true,
         title: Text(
@@ -37,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               TextField(
+                controller: emailcontroller,
                 decoration: InputDecoration(
                     prefixIcon: Icon(Icons.email),
                     hintText: "Email",
@@ -47,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const Gap(20),
               TextField(
+                controller: passwordcontroller,
                 obscureText: true,
                 decoration: InputDecoration(
                     hintText: "Password",
@@ -73,15 +76,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   var Password = passwordcontroller.text.trim();
 
                   if (Email.isEmpty || Password.isEmpty) {
-                    Utils.toastmessage("Please all the fields", Colors.black);
+                    Utils.toastmessage(
+                        "Please fill all the fields", Colors.black);
                     //show error toast
                     return;
                   }
-                  // if (Password.length < 6) {
-                  //   Utils.toastmessage("password length than > 6", Colors.blue);
-                  //   // show error taost
-                  //   return;
-                  // }
+                  if (Password.length < 6) {
+                    Utils.toastmessage("password length than > 6", Colors.blue);
+                    // show error taost
+                    return;
+                  }
                   ProgressDialog progressDialog = ProgressDialog(context,
                       title: const Text("Logging in up"),
                       message: const Text("please wait"));
