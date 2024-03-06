@@ -114,7 +114,7 @@ class _StudentListScreenState extends State<StudentListScreen> {
                       child: Column(
                         children: [
                           Card(
-                            color: Colors.amber,
+                            color: Colors.greenAccent,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
