@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
-import 'package:online_enrollmet_course/src/core/UI/screens/utility.dart';
+import 'package:online_enrollmet_course/src/core/utility/utility.dart';
 
 class UpdateScreen extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
@@ -32,8 +32,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
     namecontroller.text = widget.documentSnapshot["Name"];
     namecontroller.text = widget.documentSnapshot["Course"];
     namecontroller.text = widget.documentSnapshot["Mobile"];
-    namecontroller.text = widget.documentSnapshot["Total Fee"];
-    namecontroller.text = widget.documentSnapshot["Fee Paid"];
+    namecontroller.text = widget.documentSnapshot["TotalFee"];
+    namecontroller.text = widget.documentSnapshot["FeePaid"];
   }
 
   Widget build(BuildContext context) {
@@ -104,8 +104,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
               const Gap(20),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
-                  onPrimary: Colors.white,
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
                   //   maximumSize: Size(300, 50),
                   minimumSize: Size(280, 50),
                   shape: RoundedRectangleBorder(

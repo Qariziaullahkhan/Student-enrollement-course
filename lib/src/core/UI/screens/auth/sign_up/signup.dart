@@ -5,7 +5,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:online_enrollmet_course/src/core/UI/screens/Add_student.dart';
-import 'package:online_enrollmet_course/src/core/UI/screens/utility.dart';
+import 'package:online_enrollmet_course/src/core/UI/screens/auth/sign_in/login.dart';
+import 'package:online_enrollmet_course/src/core/utility/utility.dart';
 import 'package:online_enrollmet_course/src/core/UI/widgets/costomfields/costomtextfield.dart';
 import 'package:online_enrollmet_course/src/core/UI/widgets/studentsgetdata/students_Get_data.dart';
 
@@ -21,6 +22,7 @@ class _SingupScreenState extends State<SingupScreen> {
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
   TextEditingController conirmpasswordcontroller = TextEditingController();
+  bool _isvisiblity = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +30,7 @@ class _SingupScreenState extends State<SingupScreen> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.red,
-        title: Text(
+        title: const Text(
           "Sign Up Page",
           style: TextStyle(
               color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
@@ -64,12 +66,26 @@ class _SingupScreenState extends State<SingupScreen> {
               const Gap(20),
               TextField(
                 controller: passwordcontroller,
-                obscureText: true,
+                obscureText: _isvisiblity,
                 decoration: InputDecoration(
                     hintText: "Password",
                     labelText: "Password",
                     prefixIcon: Icon(Icons.lock),
-                    suffixIcon: Icon(Icons.visibility),
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _isvisiblity = !_isvisiblity;
+                          });
+                        },
+                        icon: _isvisiblity
+                            ? const Icon(
+                                Icons.visibility,
+                                color: Colors.black,
+                              )
+                            : const Icon(
+                                Icons.visibility_off,
+                                color: Colors.black,
+                              )),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25),
                     )),
@@ -77,12 +93,26 @@ class _SingupScreenState extends State<SingupScreen> {
               const Gap(20),
               TextField(
                 controller: conirmpasswordcontroller,
-                obscureText: true,
+                obscureText: _isvisiblity,
                 decoration: InputDecoration(
                     labelText: "Confirm Password",
                     hintText: "Confirm Password",
                     prefixIcon: Icon(Icons.lock),
-                    suffixIcon: Icon(Icons.visibility),
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _isvisiblity = !_isvisiblity;
+                          });
+                        },
+                        icon: _isvisiblity
+                            ? const Icon(
+                                Icons.visibility,
+                                color: Colors.black,
+                              )
+                            : const Icon(
+                                Icons.visibility_off,
+                                color: Colors.black,
+                              )),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25),
                     )),
@@ -90,8 +120,8 @@ class _SingupScreenState extends State<SingupScreen> {
               const Gap(40),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
-                  onPrimary: Colors.white,
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
                   //   maximumSize: Size(300, 50),
                   minimumSize: Size(280, 50),
                   shape: RoundedRectangleBorder(
@@ -135,12 +165,13 @@ class _SingupScreenState extends State<SingupScreen> {
                     if (userCredential != null) {
                       FirebaseFirestore store = FirebaseFirestore.instance;
                       String uid = userCredential.user!.uid;
-                      int dt = DateTime.now().millisecondsSinceEpoch;
+
                       store.collection("users").doc(uid).set({
                         "Full Name": FullName,
                         "Email": email,
+                        "password": password,
+                        "confirmpassword": confirmpassword,
                         "uid": uid,
-                        "dt": dt
                       });
 
                       Utils.toastmessage("Success", Colors.blue);
@@ -166,10 +197,10 @@ class _SingupScreenState extends State<SingupScreen> {
 
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return AddStudentData();
+                    return const LoginScreen();
                   }));
                 },
-                child: Text("Sign Up"),
+                child: const Text("Sign Up"),
               ),
               const Gap(10),
               Row(
@@ -180,7 +211,7 @@ class _SingupScreenState extends State<SingupScreen> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Text(
+                      child: const Text(
                         "Login",
                         style: TextStyle(
                             color: Colors.pinkAccent,

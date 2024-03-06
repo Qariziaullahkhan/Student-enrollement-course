@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:online_enrollmet_course/src/core/UI/screens/auth/sign_in/login.dart';
 import 'package:online_enrollmet_course/src/core/UI/screens/profile_screen.dart';
 import 'package:online_enrollmet_course/src/core/UI/screens/student_list.dart';
-import 'package:online_enrollmet_course/src/core/UI/screens/utility.dart';
+import 'package:online_enrollmet_course/src/core/utility/utility.dart';
 
 class AddStudentData extends StatefulWidget {
   const AddStudentData({super.key});
@@ -89,8 +89,8 @@ class _AddStudentDataState extends State<AddStudentData> {
               const Gap(20),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
-                  onPrimary: Colors.white,
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
                   //   maximumSize: Size(300, 50),
                   minimumSize: Size(280, 50),
                   shape: RoundedRectangleBorder(
@@ -128,8 +128,8 @@ class _AddStudentDataState extends State<AddStudentData> {
                       "Name": Name,
                       "Course": Course,
                       "Mobile": Mobile,
-                      "Total Fee": TotalFee,
-                      "Fee Paid": FeePaid,
+                      "TotalFee": TotalFee,
+                      "FeePaid": FeePaid,
                     });
                     Utils.toastmessage("Student data Added", Colors.black);
                     Navigator.of(context).pop();
@@ -145,8 +145,8 @@ class _AddStudentDataState extends State<AddStudentData> {
               const Gap(20),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
-                  onPrimary: Colors.white,
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
                   //   maximumSize: Size(300, 50),
                   minimumSize: Size(280, 50),
                   shape: RoundedRectangleBorder(

@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:ndialog/ndialog.dart';
 import 'package:online_enrollmet_course/src/core/UI/screens/Add_student.dart';
 import 'package:online_enrollmet_course/src/core/UI/screens/auth/sign_up/signup.dart';
-import 'package:online_enrollmet_course/src/core/UI/screens/utility.dart';
+import 'package:online_enrollmet_course/src/core/utility/utility.dart';
 import 'package:online_enrollmet_course/src/core/UI/widgets/costomfields/costomtextfield.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -18,6 +18,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   var emailcontroller = TextEditingController();
   var passwordcontroller = TextEditingController();
+  bool _isvisiblity = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,12 +51,26 @@ class _LoginScreenState extends State<LoginScreen> {
               const Gap(20),
               TextField(
                 controller: passwordcontroller,
-                obscureText: true,
+                obscureText: _isvisiblity,
                 decoration: InputDecoration(
                     hintText: "Password",
                     labelText: "Password",
                     prefixIcon: Icon(Icons.lock),
-                    suffixIcon: Icon(Icons.visibility),
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _isvisiblity = !_isvisiblity;
+                          });
+                        },
+                        icon: _isvisiblity
+                            ? const Icon(
+                                Icons.visibility,
+                                color: Colors.black,
+                              )
+                            : const Icon(
+                                Icons.visibility_off,
+                                color: Colors.black,
+                              )),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25),
                     )),
@@ -63,8 +78,8 @@ class _LoginScreenState extends State<LoginScreen> {
               const Gap(40),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
-                  onPrimary: Colors.white,
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
                   //   maximumSize: Size(300, 50),
                   minimumSize: Size(280, 50),
                   shape: RoundedRectangleBorder(
@@ -97,8 +112,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             email: Email, password: Password);
                     if (userCredential.user != null) {
                       progressDialog.dismiss();
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
                         return const AddStudentData();
                       }));
                     }
